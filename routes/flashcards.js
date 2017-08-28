@@ -17,7 +17,16 @@ router.post('/addquestionSet', (req, res, next) => {
   FlashCards.addSet(newSet, (err, questionSet) => {
     if (err) throw err;
     if (questionSet) {
-      res.send(questionSet);
+      res.send({
+        success: true,
+        message: 'New set created',
+        questionSet: questionSet
+      });
+    } else {
+      res.json({
+        success: false,
+        message: err
+      });
     }
   });
 });
